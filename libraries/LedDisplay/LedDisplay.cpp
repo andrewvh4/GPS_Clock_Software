@@ -18,14 +18,14 @@ BinaryDisplay::BinaryDisplay(int dataPin, int clkPin, int csPin, int numDevices=
 
 void BinaryDisplay::write(DateTime DateTime)
 {
-  LedControlBinary.setRow(0, 0, (int8_t) DateTime.year() -2000   );
-  LedControlBinary.setRow(0, 1, (int8_t) DateTime.month()        );
-  LedControlBinary.setRow(0, 2, (int8_t) DateTime.day()          );
-  LedControlBinary.setRow(0, 3, (int8_t) DateTime.weekOfTheYear());
-  LedControlBinary.setRow(0, 4, (int8_t) DateTime.dayOfTheWeek() );
-  LedControlBinary.setRow(0, 5, (int8_t) DateTime.hour()         );
-  LedControlBinary.setRow(0, 6, (int8_t) DateTime.minute()       );
-  LedControlBinary.setRow(0, 7, (int8_t) DateTime.second()       );
+  LedControlBinary.setRow(0, 7, (int8_t) DateTime.year() -2000   );
+  LedControlBinary.setRow(0, 6, (int8_t) DateTime.month()        );
+  LedControlBinary.setRow(0, 5, (int8_t) DateTime.day()          );
+  LedControlBinary.setRow(0, 4, (int8_t) DateTime.weekOfTheYear());
+  LedControlBinary.setRow(0, 3, (int8_t) DateTime.dayOfTheWeek() );
+  LedControlBinary.setRow(0, 2, (int8_t) DateTime.hour()         );
+  LedControlBinary.setRow(0, 1, (int8_t) DateTime.minute()       );
+  LedControlBinary.setRow(0, 0, (int8_t) DateTime.second()       );
   LedControlBinary.setIntensity(0, intensity);
 }
 
