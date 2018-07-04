@@ -27,6 +27,8 @@
  #define _I2C_READ  receive
 #endif
 
+#include <Arduino.h>
+
 ////////////////////////////////////////////////////////////////////////////////
 // utility code, some of this could be exposed in the DateTime API if needed
 
@@ -188,6 +190,18 @@ long DateTime::secondstime(void) const {
   return t;
 }
 
+//Added Function
+void DateTime::set(uint8_t year,uint8_t month,uint8_t day,uint8_t hour,uint8_t minute,uint8_t second)
+{
+  yOff = year;
+  m = month;
+  d = day;
+  hh = hour;
+  mm = minute;
+  ss = second;
+  return;
+}
+
 DateTime DateTime::operator+(const TimeSpan& span) {
   return DateTime(unixtime()+span.totalseconds());
 }
@@ -198,6 +212,15 @@ DateTime DateTime::operator-(const TimeSpan& span) {
 
 TimeSpan DateTime::operator-(const DateTime& right) {
   return TimeSpan(unixtime()-right.unixtime());
+}
+bool DateTime::operator==(const DateTime& right)
+{
+  return(yOff == right.yOff &&
+         m    == right.m    &&
+		 d    == right.d    &&
+		 hh   == right.hh   &&
+		 mm   == right.mm   &&
+		 ss   == right.ss     );
 }
 
 ////////////////////////////////////////////////////////////////////////////////

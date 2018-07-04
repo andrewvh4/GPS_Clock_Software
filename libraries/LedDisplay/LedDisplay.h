@@ -10,9 +10,10 @@ class BinaryDisplay
 {
   public:
     BinaryDisplay(int dataPin, int clkPin, int csPin, int numDevices=1);
-	LedControl LedControlClass;
+	LedControl LedControlBinary;
     void write(DateTime DateTime);
     void setIntensity(int intensity);
+	int intensity;
 };
 
 ///////////////////////////////////
@@ -20,7 +21,7 @@ class ConventionalDisplay
 {
   public:
     ConventionalDisplay(int dataPin, int clkPin, int csPin, int numDevices=4);
-	LedControl LedControlClass;
+	LedControl LedControlConventional;
     void write(DateTime DateTime);
     void setIntensity(int intensity);
 };
@@ -30,7 +31,7 @@ class DigitalDisplay
 {
   public:
     DigitalDisplay(int dataPin, int clkPin, int csPin, int numDevices=1);
-	LedControl LedControlClass;
+	LedControl LedControlDigital;
     void write(DateTime DateTime);
     void setIntensity(int intensity);
 };

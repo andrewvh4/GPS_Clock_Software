@@ -43,6 +43,9 @@ public:
     uint8_t second() const      { return ss; }
     uint8_t dayOfTheWeek()  const;
 	uint8_t weekOfTheYear() const;                 //Added Function
+	
+	//Added funtion
+	void set(uint8_t year,uint8_t month,uint8_t day,uint8_t hour,uint8_t minute,uint8_t second);
 
     // 32-bit times as seconds since 1/1/2000
     long secondstime() const;   
@@ -52,6 +55,7 @@ public:
     DateTime operator+(const TimeSpan& span);
     DateTime operator-(const TimeSpan& span);
     TimeSpan operator-(const DateTime& right);
+	bool     operator==(const DateTime& right);
 
 protected:
     uint8_t yOff, m, d, hh, mm, ss;
