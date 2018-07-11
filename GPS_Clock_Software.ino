@@ -7,16 +7,11 @@
 
 #include "LedDisplay.h"
 
-const int dataPin = 12;
-const int clkPin  = 11;
-const int csPin   = 10;
-
 bool usingInterrupt = false;
 
 DateTime PreviousDateTime;
 DateTime DateTime;
-TimeSpan TIMEOFFSET(0, -5, 0, 0);
-BinaryDisplay Display(dataPin, clkPin, csPin, 4);
+TimeSpan TimeOffset;
 
 //GPS recieves on D2, sends on D3
 SoftwareSerial GPSSerial(3, 2);
@@ -53,7 +48,7 @@ void loop() {
 
   if(gps_parsed)
   {
-    Serial.println("Display");
+    //Serial.println("Display");
     setTime();
     if(!(PreviousDateTime == DateTime))
     {
@@ -83,7 +78,25 @@ bool readGPS()
 void setTime()
 {
   DateTime.set(GPS.year, GPS.month, GPS.day, GPS.hour, GPS.minute, GPS.seconds);
-  DateTime = DateTime + TIMEOFFSET;
+  if(!USEUTC)
+  {
+    if(DateTime.isInDST() && USETAUTODST)
+    {
+      TimeOffset = TIMEZONE + DST;
+    }
+    else 
+    {
+      TimeOffset = TIMEZONE;
+    }
+    DateTime = DateTime + TimeOffset;
+    
+    if(_12HOURCLOCK)
+    {
+      DateTime.hh %= 12;
+      if(DateTime.hh == 0) DateTime.hh = 12;
+    }
+  }
+  
 }
 
 void displayTime()

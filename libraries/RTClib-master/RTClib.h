@@ -6,8 +6,6 @@
 
 #include <Arduino.h>
 #include "DateTime.h"
-class TimeSpan;
-
 
 #define PCF8523_ADDRESS       0x68
 #define PCF8523_CLKOUTCONTROL 0x0F
@@ -24,7 +22,7 @@ class TimeSpan;
 #define SECONDS_PER_DAY 86400L
 
 #define SECONDS_FROM_1970_TO_2000 946684800
-
+;
 
 // RTC based on the DS1307 chip connected via I2C and the Wire library
 enum Ds1307SqwPinMode { OFF = 0x00, ON = 0x80, SquareWave1HZ = 0x10, SquareWave4kHz = 0x11, SquareWave8kHz = 0x12, SquareWave32kHz = 0x13 };

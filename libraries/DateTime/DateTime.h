@@ -43,6 +43,7 @@ public:
     uint8_t second() const      { return ss; }
     uint8_t dayOfTheWeek()  const;
 	uint8_t weekOfTheYear() const;                 //Added Function
+	bool    isInDST();                             //Added Function
 	
 	//Added funtion
 	void set(uint8_t year,uint8_t month,uint8_t day,uint8_t hour,uint8_t minute,uint8_t second);
@@ -57,7 +58,7 @@ public:
     TimeSpan operator-(const DateTime& right);
 	bool     operator==(const DateTime& right);
 
-protected:
+//protected:
     uint8_t yOff, m, d, hh, mm, ss;
 };
 

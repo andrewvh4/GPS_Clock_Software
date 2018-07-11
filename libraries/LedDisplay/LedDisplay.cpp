@@ -39,17 +39,23 @@ void BinaryDisplay::setIntensity(int intens)
 ConventionalDisplay::ConventionalDisplay(int dataPin, int clkPin, int csPin, int numDevices=4)
 {
   LedControl temp(dataPin, clkPin, csPin, numDevices);
-  
   LedControlConventional = temp;
+  for(int i = 0; i<4; i++)
+  {
+    LedControlConventional.shutdown(i, false);
+  }
+  LedControlConventional.clearDisplay(0);
 }
 
 void ConventionalDisplay::write(DateTime DateTime)
 {
   for(int addr = 0; addr<4; addr++)
   {
-    for(int row = 0; row<7; row++)
+    for(int row = 0; row<8; row++)
     {
-	  LedControlConventional.setRow(addr, row, MINUTE_SPRITES[DateTime.minute()/12][addr][row] | HOUR_SPRITES[DateTime.hour()/12][addr][row]);
+	  
+      LedControlConventional.setRow(addr, row, MINUTE_SPRITES[0][addr][row] | HOUR_SPRITES[9][addr][row]);
+	 // LedControlConventional.setRow(addr, row, MINUTE_SPRITES[DateTime.minute()/12][addr][row] | HOUR_SPRITES[DateTime.hour()/12][addr][row]);
 	}
   }
 }

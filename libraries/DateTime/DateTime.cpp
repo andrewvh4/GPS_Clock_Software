@@ -2,6 +2,7 @@
 // Released to the public domain! Enjoy!
 
 #include "DateTime.h"
+
 #ifdef __AVR__
  #include <avr/pgmspace.h>
 #elif defined(ESP8266)
@@ -200,6 +201,15 @@ void DateTime::set(uint8_t year,uint8_t month,uint8_t day,uint8_t hour,uint8_t m
   mm = minute;
   ss = second;
   return;
+}
+//Addd Function
+bool DateTime::isInDST()
+{
+  int day_of_prev_sunday = d-dayOfTheWeek();
+  if (m<3 || m>11)      {return false;}                  //Returns false for Jan, Feb, Dec
+  else if (m>3 && m<11) {return true ;}                  //Returns true  for Apr, May, Jun, Jul, Aug, Sep, Oct
+  else if (m ==3)       {return day_of_prev_sunday >=8;} //Returns true  if prev Sunday was after day 7           ie after second Sunday
+  else                  {return day_of_prev_sunday <=0;} //Returns true  if prev Sunday was in the previous month ie before first Sunday
 }
 
 DateTime DateTime::operator+(const TimeSpan& span) {
