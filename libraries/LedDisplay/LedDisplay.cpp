@@ -5,7 +5,14 @@
 #include "LedControl_modified.h"
 #include <Arduino.h>
 
+byte flipByte(byte c)
+{
+  c = ((c>>1)&0x55)|((c<<1)&0xAA);
+  c = ((c>>2)&0x33)|((c<<2)&0xCC);
+  c = (c>>4) | (c<<4) ;
 
+  return c;
+}
 
 //////////////////////////////////////////////////////////////////////////////////
 BinaryDisplay::BinaryDisplay(int dataPin, int clkPin, int csPin, int numDevices=1)
@@ -18,14 +25,14 @@ BinaryDisplay::BinaryDisplay(int dataPin, int clkPin, int csPin, int numDevices=
 
 void BinaryDisplay::write(DateTime DateTime)
 {
-  LedControlBinary.setRow(0, 7, (int8_t) DateTime.year() -2000   );
-  LedControlBinary.setRow(0, 6, (int8_t) DateTime.month()        );
-  LedControlBinary.setRow(0, 5, (int8_t) DateTime.day()          );
-  LedControlBinary.setRow(0, 4, (int8_t) DateTime.weekOfTheYear());
-  LedControlBinary.setRow(0, 3, (int8_t) DateTime.dayOfTheWeek() );
-  LedControlBinary.setRow(0, 2, (int8_t) DateTime.hour()         );
-  LedControlBinary.setRow(0, 1, (int8_t) DateTime.minute()       );
-  LedControlBinary.setRow(0, 0, (int8_t) DateTime.second()       );
+  LedControlBinary.setRow(0, 0, flipByte((int8_t) DateTime.year() -2000   )>>1);
+  LedControlBinary.setRow(0, 1, flipByte((int8_t) DateTime.month()        )>>1);
+  LedControlBinary.setRow(0, 2, flipByte((int8_t) DateTime.day()          )>>1);
+  LedControlBinary.setRow(0, 3, flipByte((int8_t) DateTime.weekOfTheYear())>>1);
+  LedControlBinary.setRow(0, 4, flipByte((int8_t) DateTime.dayOfTheWeek() )>>1);
+  LedControlBinary.setRow(0, 5, flipByte((int8_t) DateTime.hour()         )>>1);
+  LedControlBinary.setRow(0, 6, flipByte((int8_t) DateTime.minute()       )>>1);
+  LedControlBinary.setRow(0, 7, flipByte((int8_t) DateTime.second()       )>>1);
   LedControlBinary.setIntensity(0, intensity);
 }
 

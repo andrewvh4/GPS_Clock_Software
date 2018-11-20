@@ -40,7 +40,7 @@ void setup() {
   delay(100);
 
   useInterrupt(false);
-  Display.setIntensity(1);
+  Display.setIntensity(0);
 }
 
 void loop() {

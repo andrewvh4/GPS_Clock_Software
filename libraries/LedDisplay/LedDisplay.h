@@ -5,6 +5,7 @@
 #include "RTClib.h"
 #include "LedControl_modified.h"
 
+byte flipByte(byte c);
 ///////////////////////////////////
 class BinaryDisplay
 {
