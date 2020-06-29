@@ -7,6 +7,8 @@
 
 #include "LedDisplay.h"
 
+#define DEBUG
+
 bool usingInterrupt = false;
 
 DateTime PreviousDateTime;
@@ -40,7 +42,7 @@ void setup() {
   delay(100);
 
   useInterrupt(false);
-  Display.setIntensity(0);
+  Display.setIntensity(8);
 }
 
 void loop() {
@@ -101,7 +103,8 @@ void setTime()
 
 void displayTime()
 {
- /* Serial.print("Quality:"); Serial.print(GPS.fixquality);
+#ifdef DEBUG
+  Serial.print("Quality:"); Serial.print(GPS.fixquality);
   Serial.print("\nTime: ");
   Serial.print(DateTime.hour(), DEC); Serial.print(':');
   Serial.print(DateTime.minute(), DEC); Serial.print(':');
@@ -111,7 +114,7 @@ void displayTime()
   Serial.print(DateTime.month(), DEC); Serial.print("/");
   Serial.println(DateTime.year(), DEC); 
   Serial.println("");
-  */
+#endif
   Display.write(DateTime); 
 }
 

@@ -8,8 +8,8 @@ const int DATAPIN = 12;
 const int CLKPIN  = 11;
 const int CSPIN   = 10;
 
-BinaryDisplay       Display(DATAPIN, CLKPIN, CSPIN, 4);
-//ConventionalDisplay Display(DATAPIN, CLKPIN, CSPIN, 4);
+//BinaryDisplay       Display(DATAPIN, CLKPIN, CSPIN, 1);
+ConventionalDisplay Display(DATAPIN, CLKPIN, CSPIN, 4);
 //DigitalDisplay      Display(DATAPIN, CLKPIN, CSPIN);
 
 const bool USEUTC       = false;

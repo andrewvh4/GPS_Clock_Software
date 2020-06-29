@@ -56,13 +56,16 @@ ConventionalDisplay::ConventionalDisplay(int dataPin, int clkPin, int csPin, int
 
 void ConventionalDisplay::write(DateTime DateTime)
 {
+  Serial.print("M:"); Serial.println(DateTime.minute()/5);
+  Serial.print("H:"); Serial.println(DateTime.hour()%12);
+	  
   for(int addr = 0; addr<4; addr++)
   {
     for(int row = 0; row<8; row++)
     {
 	  
-      LedControlConventional.setRow(addr, row, MINUTE_SPRITES[0][addr][row] | HOUR_SPRITES[9][addr][row]);
-	 // LedControlConventional.setRow(addr, row, MINUTE_SPRITES[DateTime.minute()/12][addr][row] | HOUR_SPRITES[DateTime.hour()/12][addr][row]);
+     // LedControlConventional.setRow(addr, row, MINUTE_SPRITES[0][addr][row] | HOUR_SPRITES[9][addr][row]);
+	  LedControlConventional.setRow(addr, row, MINUTE_SPRITES[DateTime.minute()/5][addr][row] | HOUR_SPRITES[DateTime.hour()%12][addr][row]);
 	}
   }
 }
